@@ -10,10 +10,11 @@
     "value-list-comma-newline-after": "always"
   },
   "ignoreFiles": [
+    "./dist/**",
+    "./node_modules/**",
+    "./src/assets/**",
     "**/*.html",
     "**/*.js",
-    "**/*.ts",
-    "./dist/**",
-    "./node_modules/**"
+    "**/*.ts"
   ]
 }

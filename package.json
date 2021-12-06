@@ -45,8 +45,9 @@
     "parser": "./tsconfig.json",
     "extends": "./node_modules/ts-standard/eslintrc.json",
     "ignorePatterns": [
-      "node_modules/**",
-      "dist/**"
+      "./dist/**",
+      "./node_modules/**",
+      "./src/assets/**"
     ]
   }
 }
