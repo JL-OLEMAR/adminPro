@@ -1,0 +1,19 @@
+{
+  "extends": "stylelint-config-standard",
+  "rules": {
+    "declaration-colon-newline-after": "always-multi-line",
+    "font-family-no-missing-generic-family-keyword": null,
+    "indentation": 2,
+    "no-empty-source": null,
+    "property-no-unknown": [ true, { "ignoreProperties": ["content-visibility"] } ],
+    "selector-type-no-unknown": null,
+    "value-list-comma-newline-after": "always"
+  },
+  "ignoreFiles": [
+    "**/*.html",
+    "**/*.js",
+    "**/*.ts",
+    "./dist/**",
+    "./node_modules/**"
+  ]
+}
