@@ -4,8 +4,8 @@
       <div class="card-body">
         <h4 class="card-title">Striped Progress bar</h4>
         <div class="progress m-t-20">
-          <!-- [style.width]="getPorcentaje" -->
           <div
+            [style.width]="getProgreso1"
             class="progress-bar active bg-primary progress-bar-striped"
             role="progressbar"
             style="height: 10px"
@@ -13,8 +13,8 @@
         </div>
 
         <div class="progress m-t-20">
-          <!-- [style.width]="getPorcentaje" -->
           <div
+            [style.width]="getProgreso2"
             class="progress-bar active bg-info progress-bar-striped"
             role="progressbar"
             style="height: 10px"
@@ -29,7 +29,12 @@
   <div class="col-6">
     <div class="card">
       <div class="card-body">
-        <app-incrementador [progreso]="15"></app-incrementador>
+        <!-- (valor) = $event - recibe, evento desde el hijo -->
+        <!-- [valor]="progreso1" - envia, valor al hijo -->
+        <app-incrementador
+          (valor)="progreso1 = $event"
+          [valor]="progreso1"
+        ></app-incrementador>
       </div>
     </div>
   </div>
@@ -37,7 +42,12 @@
   <div class="col-6">
     <div class="card">
       <div class="card-body">
-        <app-incrementador></app-incrementador>
+        <!-- (valor) = $event - recibe, evento desde el hijo -->
+        <!-- [valor]="progreso2" - envia, valor al hijo -->
+        <app-incrementador
+          (valor)="progreso2 = $event"
+          [valor]="progreso2"
+        ></app-incrementador>
       </div>
     </div>
   </div>
