@@ -1,6 +1,6 @@
 {
   "name": "adminpro",
-  "version": "1.0.0",
+  "version": "1.5.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "stylelint **/*.css && ts-standard --fix .",
-    "phoenix": "rm -rf ./node_modules package-lock.json && npm install"
+    "phoenix": "rm -rf ./node_modules package-lock.json && npm install --legacy-peer-deps"
   },
   "private": true,
   "dependencies": {
@@ -17,9 +17,11 @@
     "@angular/compiler": "13.0.0",
     "@angular/core": "13.0.0",
     "@angular/forms": "13.0.0",
-    "@angular/platform-browser": "13.0.0",
     "@angular/platform-browser-dynamic": "13.0.0",
+    "@angular/platform-browser": "13.0.0",
     "@angular/router": "13.0.0",
+    "chart.js": "2.9.3",
+    "ng2-charts": "2.2.3",
     "rxjs": "7.4.0",
     "tslib": "2.3.0",
     "zone.js": "0.11.4"
@@ -31,11 +33,11 @@
     "@types/jasmine": "3.10.0",
     "@types/node": "12.11.1",
     "jasmine-core": "3.10.0",
-    "karma": "6.3.0",
     "karma-chrome-launcher": "3.1.0",
     "karma-coverage": "2.0.3",
-    "karma-jasmine": "4.0.0",
     "karma-jasmine-html-reporter": "1.7.0",
+    "karma-jasmine": "4.0.0",
+    "karma": "6.3.0",
     "stylelint-config-standard": "24.0.0",
     "stylelint": "14.1.0",
     "ts-standard": "11.0.0",
