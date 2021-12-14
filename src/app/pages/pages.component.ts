@@ -6,8 +6,12 @@ import { Component, OnInit } from '@angular/core'
   styles: []
 })
 export class PagesComponent implements OnInit {
-  // constructor () { }
+  public linkTheme: Element | null = document.querySelector('#theme')
 
   ngOnInit (): void {
+    const url = localStorage.getItem('theme') ?? './assets/css/colors/purple-dark.css'
+    if (this.linkTheme !== null) {
+      return this.linkTheme.setAttribute('href', url)
+    }
   }
 }
