@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "stylelint **/*.css && ts-standard --fix .",
+    "lint": "stylelint ./src/app/**/*.css && ts-standard --fix ./src/app/**/*.ts",
     "phoenix": "rm -rf ./node_modules package-lock.json && npm install --legacy-peer-deps"
   },
   "private": true,
