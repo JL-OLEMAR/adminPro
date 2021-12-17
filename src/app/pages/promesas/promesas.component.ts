@@ -1,4 +1,4 @@
-/* eslint-disable no-constant-condition, prefer-promise-reject-errors */
+/* eslint-disable @typescript-eslint/no-floating-promises, @typescript-eslint/promise-function-async */
 import { Component, OnInit } from '@angular/core'
 
 @Component({
@@ -8,18 +8,15 @@ import { Component, OnInit } from '@angular/core'
 })
 export class PromesasComponent implements OnInit {
   ngOnInit (): void {
-    const promesa = new Promise((resolve, reject) => {
-      if (false) {
-        resolve('Hola mundo')
-      } else {
-        reject('Algo salió mal')
-      }
+    this.getUsuarios()
+      .then(usuario => console.log(usuario))
+  }
+
+  getUsuarios (): Promise<any> {
+    return new Promise((resolve) => {
+      fetch('https://reqres.in/api/users')
+        .then(resp => resp.json())
+        .then(body => resolve(body.data))
     })
-
-    promesa
-      .then(console.log)
-      .catch((error) => (console.log('Error en la promesa:', error)))
-
-    console.log('Fin del init')
   }
 }
