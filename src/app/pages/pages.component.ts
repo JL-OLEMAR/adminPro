@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core'
+import { SettingsService } from '../services/settings.service'
 
 /*
   La funcion customInitFuctions(), sirve para ejecutar funciones globales.
@@ -11,6 +12,11 @@ declare function customInitFuctions (): void
   styles: []
 })
 export class PagesComponent implements OnInit {
+  year: number = new Date().getFullYear()
+
+  // settingsService: muestra el thema por defecto
+  constructor (private readonly settingsService: SettingsService) {}
+
   ngOnInit (): void {
     customInitFuctions()
   }
