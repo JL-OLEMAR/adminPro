@@ -1,5 +1,5 @@
-import { Component } from '@angular/core'
-import { Observable, interval } from 'rxjs'
+import { Component, OnDestroy } from '@angular/core'
+import { Observable, interval, Subscription } from 'rxjs'
 import { filter, map, retry, take } from 'rxjs/operators' // eslint-disable-line @typescript-eslint/no-unused-vars
 
 @Component({
@@ -7,7 +7,9 @@ import { filter, map, retry, take } from 'rxjs/operators' // eslint-disable-line
   templateUrl: './rxjs.component.html',
   styles: []
 })
-export class RxjsComponent {
+export class RxjsComponent implements OnDestroy {
+  public intervalSubs!: Subscription
+
   constructor () {
   // this.retornaObservable()
   //   .pipe(retry(1)) // el retry es para que se vuelva a ejecutar el observable si hay un error
@@ -17,15 +19,19 @@ export class RxjsComponent {
   //     () => console.info('Obs terminado')
   //   )
 
-    this.retornaIntervalo()
+    this.intervalSubs = this.retornaIntervalo()
       .subscribe(console.log)
+  }
+
+  ngOnDestroy (): void {
+    this.intervalSubs.unsubscribe()
   }
 
   retornaIntervalo (): Observable<number> {
     // el interval se maneja en milisegundos 1000ms = 1s
     return interval(500)
       .pipe(
-        take(10), // el take es para que se detenga el observable despues de 10 iteraciones
+        // take(10), // el take es para que se detenga el observable despues de 10 iteraciones
         map(valor => (valor + 1)),
         filter(valor => ((valor % 2 === 0) && true))
       )
