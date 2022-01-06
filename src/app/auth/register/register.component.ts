@@ -1,5 +1,6 @@
 import { Component } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import Swal from 'sweetalert2'
 import { UsuarioService } from '../../services/usuario.service'
 
 @Component({
@@ -35,7 +36,9 @@ export class RegisterComponent {
     this.usuarioService.crearUsuario(this.registerForm.value)
       .subscribe(resp => {
         console.log(resp)
-      }, (err) => console.warn(err.error.msg))
+      }, (err) => {
+        Swal.fire('Error', err.error.msg, 'error')
+      })
   }
 
   campoNoValido (campo: string): boolean {
