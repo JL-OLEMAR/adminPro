@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import { Component } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import Swal from 'sweetalert2'
@@ -12,11 +13,11 @@ export class RegisterComponent {
   public formSubmitted: boolean = false
 
   public registerForm: FormGroup = this.fb.group({
-    nombre: ['Test 100', [Validators.required, Validators.minLength(3)]],
-    email: ['test100@test.com', [Validators.required, Validators.email]],
-    password: ['123456', Validators.required],
-    password2: ['123456', Validators.required],
-    terminos: [true, Validators.required]
+    nombre: ['', [Validators.required, Validators.minLength(3)]],
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', Validators.required],
+    password2: ['', Validators.required],
+    terminos: [false, Validators.required]
   }, {
     validators: this.passwordsIguales('password', 'password2')
   })
