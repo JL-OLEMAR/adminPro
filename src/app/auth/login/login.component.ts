@@ -1,16 +1,18 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
-import { Component } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
 import Swal from 'sweetalert2'
 import { UsuarioService } from '../../services/usuario.service'
+
+declare const gapi: any
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   public formSubmitted: boolean = false
 
   public loginForm: FormGroup = this.fb.group({
@@ -26,6 +28,10 @@ export class LoginComponent {
     private readonly usuarioService: UsuarioService
   ) {}
 
+  ngOnInit (): void {
+    this.renderButton()
+  }
+
   login (): void {
     this.usuarioService.login(this.loginForm.value)
       .subscribe(() => {
@@ -39,5 +45,28 @@ export class LoginComponent {
       })
 
     // this.router.navigateByUrl('/')
+  }
+
+  onSuccess (googleUser: any): string {
+    const idToken = googleUser.getAuthResponse().id_token
+    console.log(idToken)
+    return idToken
+  }
+
+  onFailure (error: any): any {
+    console.log(error)
+    return error
+  }
+
+  renderButton (): void {
+    gapi.signin2.render('my-signin2', {
+      scope: 'profile email',
+      width: 240,
+      height: 50,
+      longtitle: true,
+      theme: 'dark',
+      onsuccess: this.onSuccess,
+      onfailure: this.onFailure
+    })
   }
 }
