@@ -14,6 +14,7 @@ declare const gapi: any
 })
 export class LoginComponent implements OnInit {
   public formSubmitted: boolean = false
+  public auth2: any
 
   public loginForm: FormGroup = this.fb.group({
     // Extrae el email del localStorage o lo inicializa en null
@@ -37,25 +38,13 @@ export class LoginComponent implements OnInit {
       .subscribe(() => {
         if ((this.loginForm.controls['remember'].value) === true) {
           localStorage.setItem('email', this.loginForm.controls['email'].value)
+          this.router.navigateByUrl('/')
         } else {
           localStorage.removeItem('email')
         }
-      }, (err: any) => {
+      }, (err) => {
         Swal.fire('Error', err.error.msg, 'error')
       })
-
-    // this.router.navigateByUrl('/')
-  }
-
-  onSuccess (googleUser: any): string {
-    const idToken = googleUser.getAuthResponse().id_token
-    console.log(idToken)
-    return idToken
-  }
-
-  onFailure (error: any): any {
-    console.log(error)
-    return error
   }
 
   renderButton (): void {
@@ -64,9 +53,39 @@ export class LoginComponent implements OnInit {
       width: 240,
       height: 50,
       longtitle: true,
-      theme: 'dark',
-      onsuccess: this.onSuccess,
-      onfailure: this.onFailure
+      theme: 'dark'
     })
+
+    this.startApp()
+  }
+
+  // Método para loguearse con google
+  startApp (): void {
+    gapi.load('auth2', () => {
+      this.auth2 = gapi.auth2.init({
+        client_id: '364111995335-ka02ni351tbt4n280d14bvl56ngfrq0r.apps.googleusercontent.com',
+        cookiepolicy: 'single_host_origin'
+      })
+
+      // Obtiene el id del btn de google desde el html
+      this.attachSignin(document.getElementById('my-signin2'))
+    })
+  }
+
+  // Ataca el btn de google para obtier el token de google
+  attachSignin (element: HTMLElement | null): void {
+    // Al hacer click en el btn de google
+    this.auth2.attachClickHandler(element, {},
+      (googleUser: any) => {
+        const idToken = googleUser.getAuthResponse().id_token
+        this.usuarioService.loginGoogle(idToken)
+          .subscribe((resp) => {
+            console.log(resp)
+            // this.router.navigateByUrl('/')
+          })
+      }, (error: any) => {
+        // Manejo de errores
+        alert(JSON.stringify(error, undefined, 2))
+      })
   }
 }
