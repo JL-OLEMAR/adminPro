@@ -14,8 +14,9 @@ export class LoginComponent {
   public formSubmitted: boolean = false
 
   public loginForm: FormGroup = this.fb.group({
-    email: ['test100@test.com', [Validators.required, Validators.email]],
-    password: ['123456', Validators.required],
+    // Extrae el email del localStorage o lo inicializa en null
+    email: [window.localStorage.getItem('email'), [Validators.required, Validators.email]],
+    password: ['', Validators.required],
     remember: [false]
   })
 
@@ -23,13 +24,17 @@ export class LoginComponent {
     private readonly router: Router,
     private readonly fb: FormBuilder,
     private readonly usuarioService: UsuarioService
-  ) { }
+  ) {}
 
   login (): void {
     this.usuarioService.login(this.loginForm.value)
-      .subscribe(resp => {
-        console.log(resp)
-      }, (err) => {
+      .subscribe(() => {
+        if ((this.loginForm.controls['remember'].value) === true) {
+          localStorage.setItem('email', this.loginForm.controls['email'].value)
+        } else {
+          localStorage.removeItem('email')
+        }
+      }, (err: any) => {
         Swal.fire('Error', err.error.msg, 'error')
       })
 
