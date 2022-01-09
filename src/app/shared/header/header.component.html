@@ -381,7 +381,7 @@
                       {{ usuario.email.length > 20 ? "..." : "" }}
                     </p>
                     <a
-                      href="pages-profile.html"
+                      [routerLink]="'perfil'"
                       class="btn btn-rounded btn-danger btn-sm"
                     >
                       View Profile
@@ -392,7 +392,9 @@
 
               <li role="separator" class="divider"></li>
               <li>
-                <a href="#"><i class="ti-user"></i> My Profile</a>
+                <a [routerLink]="'perfil'">
+                  <i class="ti-user"></i> My Profile
+                </a>
               </li>
               <li>
                 <a href="#"><i class="ti-wallet"></i> My Balance</a>
