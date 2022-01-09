@@ -66,13 +66,12 @@ export class UsuarioService {
     return this.http.get(`${baseUrl}/login/renew`, {
       headers: { 'x-token': token }
     }).pipe(
-      tap((resp: any) => {
-        const { nombre, email, img, role, google, uid } = resp.usuario
+      map((resp: any) => {
+        const { nombre, email, img = '', role, google, uid } = resp.usuario
         this.usuario = new Usuario(nombre, email, '', img, role, google, uid)
-
         window.localStorage.setItem('token', resp.token)
+        return true
       }),
-      map((resp: any) => { return resp.ok }),
       catchError(() => { return of(false) }) // Atrapa el error y devuelve un observable de false
     )
   }
