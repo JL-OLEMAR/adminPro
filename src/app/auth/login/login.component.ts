@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
-import { Component, OnInit } from '@angular/core'
+import { Component, NgZone, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
 import Swal from 'sweetalert2'
@@ -26,6 +26,7 @@ export class LoginComponent implements OnInit {
   constructor (
     private readonly router: Router,
     private readonly fb: FormBuilder,
+    private readonly ngZone: NgZone,
     private readonly usuarioService: UsuarioService
   ) {}
 
@@ -82,8 +83,10 @@ export class LoginComponent implements OnInit {
         const idToken = googleUser.getAuthResponse().id_token
         this.usuarioService.loginGoogle(idToken)
           .subscribe(() => {
-            // Navega al dashboard
-            this.router.navigateByUrl('/')
+            this.ngZone.run(() => {
+              // Navega al dashboard
+              this.router.navigateByUrl('/')
+            })
           })
       }, (error: any) => {
         // Manejo de errores

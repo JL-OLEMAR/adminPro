@@ -64,12 +64,7 @@
 
         <li class="nav-item">
           <a
-            class="
-              nav-link
-              sidebartoggler
-              hidden-sm-down
-              waves-effect waves-dark
-            "
+            class="nav-link sidebartoggler hidden-sm-down waves-effect waves-dark"
             href="javascript:void(0)"
           >
             <i class="ti-menu"></i>
@@ -121,13 +116,7 @@
           </a>
 
           <div
-            class="
-              dropdown-menu dropdown-menu-right
-              mailbox
-              animated
-              fadeIn
-              fast-animate
-            "
+            class="dropdown-menu dropdown-menu-right mailbox animated fadeIn fast-animate"
           >
             <ul>
               <li>
@@ -227,14 +216,7 @@
           </a>
 
           <div
-            class="
-              dropdown-menu
-              mailbox
-              dropdown-menu-right
-              animated
-              fadeIn
-              fast-animate
-            "
+            class="dropdown-menu mailbox dropdown-menu-right animated fadeIn fast-animate"
             aria-labelledby="2"
           >
             <ul>
@@ -348,12 +330,7 @@
           </a>
 
           <div
-            class="
-              dropdown-menu dropdown-menu-right
-              animated
-              fadeIn
-              fast-animate
-            "
+            class="dropdown-menu dropdown-menu-right animated fadeIn fast-animate"
           >
             <a class="dropdown-item" href="#">
               <i class="flag-icon flag-icon-in"></i> India
@@ -392,12 +369,7 @@
           </a>
 
           <div
-            class="
-              dropdown-menu dropdown-menu-right
-              animated
-              fadeIn
-              fast-animate
-            "
+            class="dropdown-menu dropdown-menu-right animated fadeIn fast-animate"
           >
             <ul class="dropdown-user">
               <li>
@@ -437,7 +409,7 @@
               </li>
               <li role="separator" class="divider"></li>
               <li>
-                <a [routerLink]="'/login'">
+                <a (click)="logout()" class="cursor">
                   <i class="fa fa-power-off"></i> Logout
                 </a>
               </li>
