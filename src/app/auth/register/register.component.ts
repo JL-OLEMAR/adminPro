@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 import { Component } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { Router } from '@angular/router'
 import Swal from 'sweetalert2'
 import { UsuarioService } from '../../services/usuario.service'
 
@@ -24,7 +25,8 @@ export class RegisterComponent {
 
   constructor (
     private readonly fb: FormBuilder,
-    private readonly usuarioService: UsuarioService
+    private readonly usuarioService: UsuarioService,
+    private readonly router: Router
   ) { }
 
   crearUsuario (): void {
@@ -35,8 +37,9 @@ export class RegisterComponent {
 
     // Realizar el posteo
     this.usuarioService.crearUsuario(this.registerForm.value)
-      .subscribe(resp => {
-        console.log(resp)
+      .subscribe(() => {
+        // Navega al dashboard
+        this.router.navigateByUrl('/')
       }, (err) => {
         Swal.fire('Error', err.error.msg, 'error')
       })

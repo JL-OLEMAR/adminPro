@@ -38,10 +38,12 @@ export class LoginComponent implements OnInit {
       .subscribe(() => {
         if ((this.loginForm.controls['remember'].value) === true) {
           localStorage.setItem('email', this.loginForm.controls['email'].value)
-          this.router.navigateByUrl('/')
         } else {
           localStorage.removeItem('email')
         }
+
+        // Navega al dashboard
+        this.router.navigateByUrl('/')
       }, (err) => {
         Swal.fire('Error', err.error.msg, 'error')
       })
@@ -79,9 +81,9 @@ export class LoginComponent implements OnInit {
       (googleUser: any) => {
         const idToken = googleUser.getAuthResponse().id_token
         this.usuarioService.loginGoogle(idToken)
-          .subscribe((resp) => {
-            console.log(resp)
-            // this.router.navigateByUrl('/')
+          .subscribe(() => {
+            // Navega al dashboard
+            this.router.navigateByUrl('/')
           })
       }, (error: any) => {
         // Manejo de errores

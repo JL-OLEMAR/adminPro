@@ -1,5 +1,5 @@
 export class Usuario {
-  constructor(
+  constructor (
     public nombre: string,
     public email: string,
     public password?: string,
@@ -7,5 +7,5 @@ export class Usuario {
     public role?: string,
     public google?: boolean,
     public uid?: string
-  ){}
+  ) {}
 }
