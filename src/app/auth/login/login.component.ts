@@ -63,16 +63,12 @@ export class LoginComponent implements OnInit {
   }
 
   // Método para loguearse con google
-  startApp (): void {
-    gapi.load('auth2', () => {
-      this.auth2 = gapi.auth2.init({
-        client_id: '364111995335-ka02ni351tbt4n280d14bvl56ngfrq0r.apps.googleusercontent.com',
-        cookiepolicy: 'single_host_origin'
-      })
+  async startApp (): Promise<void> {
+    await this.usuarioService.googleInit()
+    this.auth2 = this.usuarioService.auth2
 
-      // Obtiene el id del btn de google desde el html
-      this.attachSignin(document.getElementById('my-signin2'))
-    })
+    // Obtiene el id del btn de google desde el html
+    this.attachSignin(document.getElementById('my-signin2'))
   }
 
   // Ataca el btn de google para obtier el token de google
