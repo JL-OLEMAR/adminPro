@@ -8,6 +8,7 @@ import { tap, map, catchError } from 'rxjs/operators'
 import { environment } from '../../environments/environment'
 import { RegisterForm } from '../interfaces/register-form.interface'
 import { LoginForm } from '../interfaces/login-form.interface'
+import { Usuario } from '../models/usuario.model'
 
 const baseUrl: string = environment.baseUrl
 
@@ -18,6 +19,7 @@ declare const gapi: any
 })
 export class UsuarioService {
   public auth2: any
+  public usuario!: Usuario
 
   constructor (
     private readonly http: HttpClient,
@@ -64,9 +66,14 @@ export class UsuarioService {
     return this.http.get(`${baseUrl}/login/renew`, {
       headers: { 'x-token': token }
     }).pipe(
-      tap((resp: any) => { window.localStorage.setItem('token', resp.token) }),
+      tap((resp: any) => {
+        const { nombre, email, img, role, google, uid } = resp.usuario
+        this.usuario = new Usuario(nombre, email, '', img, role, google, uid)
+
+        window.localStorage.setItem('token', resp.token)
+      }),
       map((resp: any) => { return resp.ok }),
-      catchError(() => of(false)) // Atrapa el error y devuelve un observable de false
+      catchError(() => { return of(false) }) // Atrapa el error y devuelve un observable de false
     )
   }
 
