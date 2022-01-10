@@ -27,6 +27,14 @@ export class UsuarioService {
     private readonly ngZone: NgZone
   ) { this.googleInit() }
 
+  get token (): string {
+    return window.localStorage.getItem('token') ?? ''
+  }
+
+  get uid (): string {
+    return this.usuario.uid ?? ''
+  }
+
   googleInit (): Promise<any> {
     return new Promise<void>(resolve => {
       gapi.load('auth2', () => {
@@ -47,6 +55,17 @@ export class UsuarioService {
       }))
   }
 
+  actualizarUsuario (data: {email: string, nombre: string, role: string}): Observable<any> {
+    data = {
+      ...data,
+      role: this.usuario.role ?? 'USER_ROLE'
+    }
+
+    return this.http.put(`${baseUrl}/usuarios/${this.uid}`, data, {
+      headers: { 'x-token': this.token }
+    })
+  }
+
   login (formData: LoginForm): Observable<any> {
     return this.http.post(`${baseUrl}/login`, formData)
       .pipe(tap((resp: any) => {
@@ -62,9 +81,8 @@ export class UsuarioService {
   }
 
   validarToken (): Observable<boolean> {
-    const token: string = window.localStorage.getItem('token') ?? ''
     return this.http.get(`${baseUrl}/login/renew`, {
-      headers: { 'x-token': token }
+      headers: { 'x-token': this.token }
     }).pipe(
       map((resp: any) => {
         const { nombre, email, img = '', role, google, uid } = resp.usuario

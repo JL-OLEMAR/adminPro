@@ -5,34 +5,41 @@
         <h4 class="card-title">Mi perfil de usuario</h4>
         <h6 class="card-subtitle">Ajustes</h6>
 
-        <form class="form p-t-20">
+        <form
+          [formGroup]="perfilForm"
+          (submit)="actualizarPerfil()"
+          class="form p-t-20"
+        >
           <div class="form-group">
-            <label for="exampleInputuname">User Name</label>
+            <label for="exampleInputuname">Nombre del usuario</label>
             <div class="input-group">
               <div class="input-group-addon"><i class="ti-user"></i></div>
               <input
-                type="text"
                 class="form-control"
+                formControlName="nombre"
                 id="exampleInputuname"
-                placeholder="Username"
+                placeholder="Nombre"
+                type="text"
               />
             </div>
           </div>
 
           <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
+            <label for="exampleInputEmail1">Correo electrónico</label>
             <div class="input-group">
               <div class="input-group-addon"><i class="ti-email"></i></div>
               <input
-                type="email"
                 class="form-control"
+                formControlName="email"
                 id="exampleInputEmail1"
-                placeholder="Enter email"
+                placeholder="Email"
+                type="email"
               />
             </div>
           </div>
 
           <button
+            [disabled]="perfilForm.invalid"
             type="submit"
             class="btn btn-success waves-effect waves-light m-r-10"
           >
