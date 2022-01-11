@@ -59,11 +59,13 @@
 
         <img src="" alt="" />
 
-        <input type="file" name="" id="" />
+        <input (change)="cambiarImagen($event)" type="file" />
         <br />
         <br />
 
         <button
+          (click)="subirImagen()"
+          [disabled]="!imagenSubir"
           type="button"
           class="btn btn-success btn-block waves-effect waves-light m-r-10"
         >
