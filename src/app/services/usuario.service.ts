@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-floating-promises, @typescript-eslint/promise-function-async */
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import { Injectable, NgZone } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { Router } from '@angular/router'
@@ -35,8 +35,8 @@ export class UsuarioService {
     return this.usuario.uid ?? ''
   }
 
-  googleInit (): Promise<any> {
-    return new Promise<void>(resolve => {
+  async googleInit (): Promise<any> {
+    return await new Promise<void>(resolve => {
       gapi.load('auth2', () => {
         this.auth2 = gapi.auth2.init({
           client_id: '364111995335-ka02ni351tbt4n280d14bvl56ngfrq0r.apps.googleusercontent.com',

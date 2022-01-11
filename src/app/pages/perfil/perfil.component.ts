@@ -13,8 +13,9 @@ import { FileUploadService } from '../../services/file-upload.service'
 })
 export class PerfilComponent implements OnInit {
   public perfilForm!: FormGroup
-  public usuario!: Usuario
+  public usuario: Usuario
   public imagenSubir!: File
+  public imgTemp!: any
 
   constructor (
     private readonly fb: FormBuilder,
@@ -39,14 +40,23 @@ export class PerfilComponent implements OnInit {
   }
 
   cambiarImagen (event: any): void {
-    const imgChoosed = event?.target?.files[0]
-    if (imgChoosed ?? null) {
-      this.imagenSubir = imgChoosed
+    const file = event?.target?.files[0]
+    if (!file || file.type.indexOf('image') < 0) {
+      this.imgTemp = null
+    }
+    this.imagenSubir = file
+
+    const reader = new FileReader()
+    reader.readAsDataURL(file)
+
+    reader.onloadend = () => {
+      this.imgTemp = reader.result
     }
   }
 
   subirImagen (): void {
     this.fileUploadService
-      .actualizarFoto(this.imagenSubir, 'usuarios', (this.usuario.uid ? this.usuario.uid : ''))
+      .actualizarFoto(this.imagenSubir, 'usuarios', (this.usuario.uid ?? ''))
+      .then(img => { this.usuario.img = img })
   }
 }

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core'
+import Swal from 'sweetalert2'
 import { environment } from '../../environments/environment'
 
 const baseUrl = environment.baseUrl
@@ -7,17 +8,14 @@ const baseUrl = environment.baseUrl
   providedIn: 'root'
 })
 export class FileUploadService {
-  // constructor () { }
-
   async actualizarFoto (
     archivo: File,
     tipo: 'usuarios' | 'medicos' | 'hospitales',
     uid: string
-  ): Promise<boolean> {
+  ): Promise<any> {
     try {
       const url = `${baseUrl}/upload/${tipo}/${uid}`
 
-      console.log(url)
       const formData = new FormData()
       formData.append('imagen', archivo)
 
@@ -28,7 +26,13 @@ export class FileUploadService {
       })
 
       const data = await resp.json()
-      return data
+      if (data.ok === true) {
+        await Swal.fire('Guardado', data.msg, 'success')
+        return data.nombreArchivo
+      } else {
+        await Swal.fire('Error', data.msg, 'error')
+        return false
+      }
     } catch (error) {
       console.log(error)
       return false

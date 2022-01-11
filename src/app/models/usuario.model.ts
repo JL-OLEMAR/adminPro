@@ -14,13 +14,23 @@ export class Usuario {
     public uid?: string
   ) {}
 
-  get imagenUrl (): string | any {
-    if (!this.img) {
-      return `${baseUrl}/upload/usuarios/no-image`
-    } else if (this.img.includes('https')) {
+  get imagenUrl (): any {
+    if (this.img?.includes('https')) {
       return this.img
-    } else {
-      return `${baseUrl}/upload/usuarios/${this.img}`
     }
+
+    if (this.img) {
+      return `${baseUrl}/upload/usuarios/${this.img}`
+    } else {
+      return `${baseUrl}/upload/usuarios/no-image`
+    }
+
+    // if (!this.img) {
+    //   return `${baseUrl}/upload/usuarios/no-image`
+    // } else if (this.img.includes('https')) {
+    //   return this.img
+    // } else if (this.img) {
+    //   return `${baseUrl}/upload/usuarios/${this.img}`
+    // }
   }
 }

@@ -57,7 +57,20 @@
         <h4 class="card-title">Avatar</h4>
         <h6 class="card-subtitle">Imagen del usuario</h6>
 
-        <img src="" alt="" />
+        <div class="text-center">
+          <img
+            *ngIf="!imgTemp"
+            [src]="usuario.imagenUrl"
+            [alt]="usuario.nombre"
+            class="img-perfil"
+          />
+          <img
+            *ngIf="imgTemp"
+            [src]="imgTemp"
+            [alt]="usuario.nombre"
+            class="img-perfil"
+          />
+        </div>
 
         <input (change)="cambiarImagen($event)" type="file" />
         <br />
