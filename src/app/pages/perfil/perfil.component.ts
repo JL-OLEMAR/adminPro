@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-floating-promises, @typescript-eslint/strict-boolean-expressions */
 import { Component, OnInit } from '@angular/core'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
+import Swal from 'sweetalert2'
 
 import { Usuario } from '../../models/usuario.model'
 import { UsuarioService } from '../../services/usuario.service'
@@ -36,14 +37,20 @@ export class PerfilComponent implements OnInit {
         const { nombre, email } = this.perfilForm.value
         this.usuario.nombre = nombre
         this.usuario.email = email
+
+        Swal.fire('Guardado', 'Cambios fueron guardados', 'success')
+      }, (err) => {
+        Swal.fire('Error', err.error.msg, 'error')
       })
   }
 
   cambiarImagen (event: any): void {
     const file = event?.target?.files[0]
-    if (!file || file.type.indexOf('image') < 0) {
+    if (!file) {
       this.imgTemp = null
+      return
     }
+
     this.imagenSubir = file
 
     const reader = new FileReader()
