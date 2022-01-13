@@ -25,7 +25,7 @@
   <div class="col-12">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Lista de usuarios</h4>
+        <h4 class="card-title">Total de usuarios ({{ totalUsers }})</h4>
         <div class="table-responsive">
           <table class="table table-bordered">
             <thead>
@@ -40,12 +40,15 @@
             </thead>
 
             <tbody>
-              <tr>
-                <td>Avatar data</td>
-                <td>Correo data</td>
-                <td>Nombre data</td>
-                <td>Role data</td>
-                <td>Auth data</td>
+              <tr *ngFor="let user of users">
+                <td>Avatar</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.nombre }}</td>
+                <td>{{ user.role }}</td>
+                <td>
+                  <span class="label label-danger"> Google </span>
+                  <span class="label label-info"> Email </span>
+                </td>
 
                 <td class="text-nowrap">
                   <a
@@ -69,8 +72,10 @@
           </table>
         </div>
 
-        <button class="btn btn-secondary m-r-10">Anterior</button>
-        <button class="btn btn-secondary">Siguiente</button>
+        <div class="d-flex justify-content-center">
+          <button class="btn btn-secondary m-r-10">Anterior</button>
+          <button class="btn btn-secondary m-l-10">Siguiente</button>
+        </div>
       </div>
     </div>
   </div>
