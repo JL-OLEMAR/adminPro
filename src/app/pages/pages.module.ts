@@ -30,16 +30,6 @@ import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component'
     RxjsComponent,
     UsuariosComponent
   ],
-  exports: [
-    AccountSettingsComponent,
-    DashboardComponent,
-    Grafica1Component,
-    PagesComponent,
-    PerfilComponent,
-    ProgressComponent,
-    PromesasComponent,
-    RxjsComponent
-  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -47,6 +37,7 @@ import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component'
     RouterModule,
     SharedModule,
     ComponentsModule
-  ]
+  ],
+  exports: []
 })
 export class PagesModule { }

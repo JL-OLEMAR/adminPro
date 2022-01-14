@@ -3,23 +3,23 @@ import { CommonModule } from '@angular/common'
 import { RouterModule } from '@angular/router'
 
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component'
-import { SidebarComponent } from './sidebar/sidebar.component'
 import { HeaderComponent } from './header/header.component'
+import { SidebarComponent } from './sidebar/sidebar.component'
 
 @NgModule({
   declarations: [
     BreadcrumbsComponent,
-    SidebarComponent,
-    HeaderComponent
-  ],
-  exports: [
-    BreadcrumbsComponent,
-    SidebarComponent,
-    HeaderComponent
+    HeaderComponent,
+    SidebarComponent
   ],
   imports: [
     CommonModule,
     RouterModule
+  ],
+  exports: [
+    BreadcrumbsComponent,
+    HeaderComponent,
+    SidebarComponent
   ]
 })
 export class SharedModule { }

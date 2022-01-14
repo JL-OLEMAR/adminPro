@@ -27,3 +27,17 @@
   width: 50px;
   border-radius: 100%;
 }
+
+.fondo-modal-imagen {
+  background-color: rgb(0 0 0 / 40%);
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 999;
+}
+
+.hide-modal {
+  display: none;
+}
