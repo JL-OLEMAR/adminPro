@@ -11,6 +11,7 @@ export class UsuariosComponent implements OnInit {
   public totalUsers: number = 0
   public users: Usuario[] = []
   public desde: number = 0
+  public isLoading: boolean = false
 
   constructor (private readonly usuarioService: UsuarioService) { }
 
@@ -19,10 +20,12 @@ export class UsuariosComponent implements OnInit {
   }
 
   cargarUsuarios (): void {
+    this.isLoading = true
     this.usuarioService.getAllUsers(this.desde)
       .subscribe(({ usuarios, total }) => {
         this.users = usuarios
         this.totalUsers = total
+        this.isLoading = false
       })
   }
 
