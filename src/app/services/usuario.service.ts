@@ -9,6 +9,8 @@ import { environment } from '../../environments/environment'
 import { RegisterForm } from '../interfaces/register-form.interface'
 import { LoginForm } from '../interfaces/login-form.interface'
 import { GetAllUser } from '../interfaces/getAllUsers.interface'
+import { GetUserResponse } from '../interfaces/getUser.interface'
+import { UpdateUserForm } from '../interfaces/updateUser-form.interface'
 import { Usuario } from '../models/usuario.model'
 
 const baseUrl: string = environment.baseUrl
@@ -62,13 +64,16 @@ export class UsuarioService {
       }))
   }
 
-  actualizarUsuario (data: {email: string, nombre: string, role: string}): Observable<any> {
-    data = {
-      ...data,
-      role: this.usuario.role ?? 'USER_ROLE'
+  actualizarUsuario (user: UpdateUserForm): Observable<any> {
+    user = {
+      ...user,
+      role: this.usuario.role ?? 'ROLE_USER'
     }
+    return this.http.put(`${baseUrl}/usuarios/${this.uid}`, user, this.headers)
+  }
 
-    return this.http.put(`${baseUrl}/usuarios/${this.uid}`, data, this.headers)
+  changeRoleUser (user: Usuario): Observable<any> {
+    return this.http.put<GetUserResponse>(`${baseUrl}/usuarios/${user.uid ?? ''}`, user, this.headers)
   }
 
   login (formData: LoginForm): Observable<any> {

@@ -90,4 +90,8 @@ export class UsuariosComponent implements OnInit {
       }
     })
   }
+
+  changeRoleOf (user: Usuario): void {
+    this.usuarioService.changeRoleUser(user).subscribe()
+  }
 }
