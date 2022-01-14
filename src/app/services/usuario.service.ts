@@ -121,4 +121,9 @@ export class UsuarioService {
         }
       }))
   }
+
+  deleteUser (usuario: Usuario): Observable<any> {
+    const url = `${baseUrl}/usuarios/${usuario.uid ?? ''}`
+    return this.http.delete(url, this.headers)
+  }
 }

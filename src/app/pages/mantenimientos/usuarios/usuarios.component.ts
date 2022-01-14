@@ -1,4 +1,7 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import { Component, OnInit } from '@angular/core'
+import Swal from 'sweetalert2'
+
 import { Usuario } from '../../../models/usuario.model'
 import { UsuarioService } from '../../../services/usuario.service'
 import { SearchService } from '../../../services/search.service'
@@ -57,5 +60,28 @@ export class UsuariosComponent implements OnInit {
       .subscribe(resultados => {
         this.users = resultados
       })
+  }
+
+  deleteUser (usuario: Usuario): void {
+    Swal.fire({
+      title: '¿Borrar usuario?',
+      text: `Esta a punto de borrar a ${usuario.nombre}!`,
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, borrarlo!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.usuarioService.deleteUser(usuario)
+          .subscribe(() => {
+            Swal.fire(
+              'Usuario borrado!',
+              `${usuario.nombre} fue eliminado correctamente`,
+              'success'
+            )
+
+            this.cargarUsuarios()
+          })
+      }
+    })
   }
 }
