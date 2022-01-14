@@ -3,7 +3,13 @@
   <div class="col-12">
     <div class="card">
       <div class="card-body">
-        <input class="form-control" type="text" placeholder="Buscar usuario" />
+        <input
+          (keyup)="buscar(txtTermino.value)"
+          #txtTermino
+          class="form-control"
+          placeholder="Buscar usuario"
+          type="text"
+        />
       </div>
     </div>
   </div>
@@ -85,7 +91,10 @@
           </table>
         </div>
 
-        <div class="d-flex justify-content-center">
+        <div
+          *ngIf="txtTermino.value.length === 0"
+          class="d-flex justify-content-center"
+        >
           <button (click)="cambiarPagina(-5)" class="btn btn-secondary m-r-10">
             Anterior
           </button>
