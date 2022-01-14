@@ -107,8 +107,20 @@ export class UsuarioService {
     })
   }
 
-  getAllUsers (desde: number = 0): Observable<any> {
+  getAllUsers (desde: number = 0): Observable<GetAllUser> {
     const url = `${baseUrl}/usuarios?desde=${desde}`
     return this.http.get<GetAllUser>(url, this.headers)
+      .pipe(
+        map((resp: any) => {
+          const usuariosResp = resp.usuarios.map((user: Usuario) => (
+            new Usuario(user.nombre, user.email, '', user.img, user.role, user.google, user.uid)
+          ))
+
+          return {
+            total: resp.total,
+            usuarios: usuariosResp
+          }
+        })
+      )
   }
 }

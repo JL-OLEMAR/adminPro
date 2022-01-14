@@ -14,3 +14,12 @@
   border-radius: 100%;
   margin-bottom: 15px;
 }
+
+.w100 {
+  width: 100px;
+}
+
+.avatar {
+  width: 60px;
+  border-radius: 100%;
+}

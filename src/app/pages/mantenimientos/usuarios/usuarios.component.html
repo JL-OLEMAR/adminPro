@@ -1,4 +1,5 @@
-<!-- <div class="row animated fadeIn fast">
+<!-- Search -->
+<div class="row animated fadeIn fast">
   <div class="col-12">
     <div class="card">
       <div class="card-body">
@@ -6,10 +7,11 @@
       </div>
     </div>
   </div>
-</div> -->
+</div>
+<!-- End Search -->
 
 <!-- Loading -->
-<!-- <div class="row animated fadeIn fast">
+<div class="row animated fadeIn fast">
   <div class="col-12">
     <div class="alert alert-info text-center">
       <h4 class="alert-heading">Cargando...</h4>
@@ -17,7 +19,7 @@
       <p class="mb-0">Por favor espere</p>
     </div>
   </div>
-</div> -->
+</div>
 <!-- End Loading -->
 
 <!-- TABLE OF USER -->
@@ -30,18 +32,24 @@
           <table class="table table-bordered">
             <thead>
               <tr>
-                <th>Avatar</th>
+                <th class="w100">Avatar</th>
                 <th>Correo</th>
                 <th>Nombre</th>
-                <th>Role</th>
-                <th>Auth</th>
-                <th class="text-nowrap">Acciones</th>
+                <th class="w100">Role</th>
+                <th class="w100">Auth</th>
+                <th class="text-nowrap w100">Acciones</th>
               </tr>
             </thead>
 
             <tbody>
               <tr *ngFor="let user of users">
-                <td>Avatar</td>
+                <td class="text-center">
+                  <img
+                    [src]="user.imagenUrl"
+                    [alt]="user.nombre"
+                    class="avatar"
+                  />
+                </td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.nombre }}</td>
                 <td>{{ user.role }}</td>

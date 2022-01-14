@@ -21,6 +21,8 @@ export class Usuario {
       return this.img
     } else if (this.img) {
       return `${baseUrl}/upload/usuarios/${this.img}`
+    } else {
+      return `${baseUrl}/upload/usuarios/no-image`
     }
   }
 }
