@@ -1,30 +1,43 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
-import { Component, OnInit } from '@angular/core'
+import { Component, OnDestroy, OnInit } from '@angular/core'
+import { Subscription } from 'rxjs'
+import { delay } from 'rxjs/operators'
 import Swal from 'sweetalert2'
 
 import { Usuario } from '../../../models/usuario.model'
 import { UsuarioService } from '../../../services/usuario.service'
 import { SearchService } from '../../../services/search.service'
+import { ModalImagenService } from '../../../services/modal-imagen.service'
 
 @Component({
   selector: 'app-usuarios',
   templateUrl: './usuarios.component.html',
   styles: []
 })
-export class UsuariosComponent implements OnInit {
+export class UsuariosComponent implements OnInit, OnDestroy {
   public totalUsers: number = 0
   public users: Usuario[] = []
   public usersTemp: Usuario[] = []
   public desde: number = 0
   public isLoading: boolean = false
+  public imgSubs!: Subscription
 
   constructor (
     private readonly usuarioService: UsuarioService,
-    private readonly searchService: SearchService
+    private readonly searchService: SearchService,
+    private readonly modalImagenService: ModalImagenService
   ) { }
 
   ngOnInit (): void {
     this.cargarUsuarios()
+
+    this.imgSubs = this.modalImagenService.newImg
+    .pipe(delay(100))
+    .subscribe(() => this.cargarUsuarios())
+  }
+
+  ngOnDestroy(): void {
+    this.imgSubs.unsubscribe()
   }
 
   cargarUsuarios (): void {
@@ -93,5 +106,9 @@ export class UsuariosComponent implements OnInit {
 
   changeRoleOf (user: Usuario): void {
     this.usuarioService.changeRoleUser(user).subscribe()
+  }
+
+  openModal (user: Usuario): void {
+    this.modalImagenService.openModal('usuarios', user.uid ?? '', user.img)
   }
 }
