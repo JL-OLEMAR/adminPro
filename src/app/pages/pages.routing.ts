@@ -12,6 +12,8 @@ import { RxjsComponent } from './rxjs/rxjs.component'
 import { PerfilComponent } from './perfil/perfil.component'
 
 // Mantenimientos
+import { HospitalesComponent } from './mantenimientos/hospitales/hospitales.component'
+import { MedicosComponent } from './mantenimientos/medicos/medicos.component'
 import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component'
 
 const routes: Routes = [
@@ -29,6 +31,8 @@ const routes: Routes = [
       { path: 'perfil', component: PerfilComponent, data: { titulo: 'Perfil de usuario' } },
 
       // Mantenimientos
+      { path: 'hospitales', component: HospitalesComponent, data: { titulo: 'Mantenimiento de hospitales' } },
+      { path: 'medicos', component: MedicosComponent, data: { titulo: 'Mantenimiento de médicos' } },
       { path: 'usuarios', component: UsuariosComponent, data: { titulo: 'Mantenimiento de usuarios' } }
     ]
   }
