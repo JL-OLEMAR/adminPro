@@ -24,7 +24,7 @@ export class HospitalService {
     }
   }
 
-  getAllHospitals (): Observable<Hospital> {
+  getAllHospitals (): Observable<Hospital[]> {
     const url = `${baseUrl}/hospitales`
     return this.http.get<GetAllHospitalsResp>(url, this.headers)
       .pipe(map((resp: any) => resp.hospitales))
