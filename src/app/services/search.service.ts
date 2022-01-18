@@ -5,6 +5,9 @@ import { map } from 'rxjs/operators'
 
 import { environment } from '../../environments/environment'
 import { Usuario } from '../models/usuario.model'
+import { Hospital } from '../models/hospital.model'
+import { User as UserInterface } from '../interfaces/getUser.interface'
+import { Hospital as HospitalInterface } from '../interfaces/getHospital.interface'
 
 const baseUrl: string = environment.baseUrl
 
@@ -26,21 +29,27 @@ export class SearchService {
     }
   }
 
-  private transformarUsuarios (resultados: any[]): Usuario[] {
-    return resultados.map((user: Usuario) => (
+  private transformarUsuarios (resultados: UserInterface[]): Usuario[] {
+    return resultados.map((user: UserInterface) => (
       new Usuario(user.nombre, user.email, '', user.img, user.role, user.google, user.uid)
     ))
+  }
+
+  private transformarHospitales (resultados: HospitalInterface[]): Hospital[] {
+    return resultados
   }
 
   searchByTipo (
     tipo: 'usuarios' | 'medicos' | 'hospitales',
     termino: string = ''
-  ): Observable<any> {
+  ): Observable<any[]> {
     const url = `${baseUrl}/todo/coleccion/${tipo}/${termino}`
     return this.http.get<any[]>(url, this.headers)
       .pipe(map((resp: any) => {
         if (tipo === 'usuarios') {
           return this.transformarUsuarios(resp.resultados)
+        } else if (tipo === 'hospitales') {
+          return this.transformarHospitales(resp.resultados)
         } else {
           return []
         }

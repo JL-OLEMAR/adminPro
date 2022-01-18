@@ -4,7 +4,7 @@ export interface GetUserResponse {
   user: User[]
 }
 
-interface User {
+export interface User {
   nombre: string
   email: string
   img: string

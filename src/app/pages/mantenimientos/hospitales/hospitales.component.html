@@ -1,13 +1,19 @@
 <!-- Search -->
-<!-- <div class="row animated fadeIn fast">
+<div class="row animated fadeIn fast">
   <div class="col-12">
     <div class="card">
       <div class="card-body">
-        <input class="form-control" type="text" placeholder="Buscar hospital" />
+        <input
+          (keyup)="searchHospital(txtTermino.value)"
+          #txtTermino
+          class="form-control"
+          placeholder="Buscar hospital"
+          type="text"
+        />
       </div>
     </div>
   </div>
-</div> -->
+</div>
 <!-- End Search -->
 
 <!-- Loading -->

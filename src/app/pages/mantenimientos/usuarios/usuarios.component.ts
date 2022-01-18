@@ -70,7 +70,7 @@ export class UsuariosComponent implements OnInit, OnDestroy {
     }
 
     this.searchService.searchByTipo('usuarios', termino)
-      .subscribe(resultados => {
+      .subscribe((resultados: Usuario[]) => {
         this.users = resultados
       })
   }
