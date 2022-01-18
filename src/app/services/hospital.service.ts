@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators'
 
 import { environment } from '../../environments/environment'
 import { Hospital, GetAllHospitalsResp } from '../interfaces/getAllHospitals.interface'
+import { GetHospitalResp } from '../interfaces/getHospital.interface'
 
 const baseUrl = environment.baseUrl
 
@@ -28,5 +29,20 @@ export class HospitalService {
     const url = `${baseUrl}/hospitales`
     return this.http.get<GetAllHospitalsResp>(url, this.headers)
       .pipe(map((resp: any) => resp.hospitales))
+  }
+
+  newHospital (nombre: string): Observable<any> {
+    const url = `${baseUrl}/hospitales`
+    return this.http.post<GetHospitalResp>(url, { nombre }, this.headers)
+  }
+
+  updateHospital (_id: string, nombre: string): Observable<any> {
+    const url = `${baseUrl}/hospitales/${_id}`
+    return this.http.put<GetHospitalResp>(url, { nombre }, this.headers)
+  }
+
+  deleteHospital (_id: string): Observable<any> {
+    const url = `${baseUrl}/hospitales/${_id}`
+    return this.http.delete(url, this.headers)
   }
 }
