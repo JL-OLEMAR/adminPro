@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-floating-promises, @typescript-eslint/strict-boolean-expressions */
-import { Component, OnDestroy, OnInit } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
-import { Subscription } from 'rxjs'
 import Swal from 'sweetalert2'
 
 import { Usuario } from '../../models/usuario.model'
@@ -13,12 +12,11 @@ import { FileUploadService } from '../../services/file-upload.service'
   templateUrl: './perfil.component.html',
   styles: []
 })
-export class PerfilComponent implements OnInit, OnDestroy {
+export class PerfilComponent implements OnInit {
   public perfilForm!: FormGroup
   public usuario: Usuario
   public imagenSubir!: File
   public imgTemp!: any
-  public subsPerf!: Subscription
 
   constructor (
     private readonly fb: FormBuilder,
@@ -33,12 +31,8 @@ export class PerfilComponent implements OnInit, OnDestroy {
     })
   }
 
-  ngOnDestroy (): void {
-    this.subsPerf.unsubscribe()
-  }
-
   actualizarPerfil (): any {
-    this.subsPerf = this.usuarioService.actualizarUsuario(this.perfilForm.value)
+    this.usuarioService.actualizarUsuario(this.perfilForm.value)
       .subscribe(() => {
         const { nombre, email } = this.perfilForm.value
         this.usuario.nombre = nombre

@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router'
 // Modules
 import { SharedModule } from '../shared/shared.module'
 import { ComponentsModule } from '../components/components.module'
+import { PipesModule } from '../pipes/pipes.module'
 
 // Components
 import { AccountSettingsComponent } from './account-settings/account-settings.component'
@@ -40,7 +41,8 @@ import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component'
     ReactiveFormsModule,
     RouterModule,
     SharedModule,
-    ComponentsModule
+    ComponentsModule,
+    PipesModule
   ],
   exports: []
 })

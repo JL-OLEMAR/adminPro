@@ -43,7 +43,13 @@
 
             <tbody>
               <tr *ngFor="let hospital of hospitales">
-                <td class="text-center w100">{{ hospital.img }}</td>
+                <td class="text-center w100">
+                  <img
+                    [src]="hospital.img | imagen: 'hospitales'"
+                    [alt]="hospital.nombre"
+                    class="avatar cursor"
+                  />
+                </td>
 
                 <td>
                   <input
