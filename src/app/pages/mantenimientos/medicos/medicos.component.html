@@ -1,1 +1,70 @@
-<p>medicos works!</p>
+<!-- Search -->
+<div class="row animated fadeIn fast">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <input class="form-control" type="text" placeholder="Doctor search" />
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Search -->
+
+<!-- Loading -->
+<div class="row animated fadeIn fast">
+  <div class="col-12">
+    <div class="alert alert-info text-center">
+      <h4 class="alert-heading">Loading...</h4>
+      <i class="fa fa-spin fa-refresh fa-2x"></i>
+      <p class="mb-0">Please wait</p>
+    </div>
+  </div>
+</div>
+<!-- End Loading -->
+
+<!-- TABLE OF USER -->
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Doctors List</h4>
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th class="w100">Avatar</th>
+                <th>Name</th>
+                <th class="w100 text-nowrap text-center">Actions</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td class="text-center">Avatar</td>
+                <td>Doctor name</td>
+
+                <td class="text-nowrap text-center">
+                  <a href="#" data-toggle="tooltip" data-original-title="Edit">
+                    <i class="fa fa-pencil text-inverse m-r-10"></i>
+                  </a>
+
+                  <a
+                    href="#"
+                    data-toggle="tooltip"
+                    data-original-title="Delete"
+                  >
+                    <i class="fa fa-close text-danger"></i>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- <button class="btn btn-secondary m-r-10">Anterior</button>
+        <button class="btn btn-secondary">Siguiente</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END TABLE OF USER -->
