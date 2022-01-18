@@ -37,7 +37,10 @@
           <!-- Btn New Hospital -->
           <div class="col">
             <div class="text-right">
-              <button class="btn btn-primary m-b-20">
+              <button
+                (click)="openSweetAlertForm()"
+                class="btn btn-primary m-b-20"
+              >
                 <i class="fa fa-hospital-o"></i>
                 Crear hospital
               </button>
@@ -45,13 +48,14 @@
           </div>
           <!-- End Btn New Hospital -->
         </div>
+
         <div class="table-responsive">
           <table class="table table-bordered">
             <thead>
               <tr>
                 <th class="text-center w100">Foto</th>
                 <th>Nombre</th>
-                <th class="text-nowrap text-center">Acciones</th>
+                <th class="w100 text-nowrap text-center">Acciones</th>
               </tr>
             </thead>
 
@@ -62,6 +66,7 @@
                     [src]="hospital.img | imagen: 'hospitales'"
                     [alt]="hospital.nombre"
                     class="avatar cursor"
+                    (click)="openModal(hospital)"
                   />
                 </td>
 
@@ -76,15 +81,17 @@
 
                 <td class="text-nowrap text-center">
                   <a
-                    href="#"
-                    data-toggle="tooltip"
+                    (click)="editarHospital(hospital)"
+                    class="cursor"
                     data-original-title="Guardar cambios"
+                    data-toggle="tooltip"
                   >
                     <i class="fa fa-pencil text-inverse m-r-10"></i>
                   </a>
 
                   <a
-                    href="#"
+                    (click)="deleteHospital(hospital)"
+                    class="cursor"
                     data-toggle="tooltip"
                     data-original-title="Eliminar"
                   >
