@@ -33,7 +33,7 @@
     "@angular/cli": "13.0.1",
     "@angular/compiler-cli": "13.0.0",
     "@commitlint/cli": "16.0.3",
-    "@commitlint/config-conventional": "16.0.0",
+    "@commitlint/config-angular": "16.0.0",
     "@types/jasmine": "3.10.0",
     "@types/node": "12.11.1",
     "husky": "7.0.4",
@@ -56,5 +56,11 @@
       "./node_modules/**",
       "./src/assets/**"
     ]
-  }
+  },
+  "husky": {
+		"hooks": {
+			"commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "npm run lint"
+		}
+	}
 }
