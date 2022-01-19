@@ -11,7 +11,7 @@
 <!-- End Search -->
 
 <!-- Loading -->
-<div class="row animated fadeIn fast">
+<div *ngIf="loading" class="row animated fadeIn fast">
   <div class="col-12">
     <div class="alert alert-info text-center">
       <h4 class="alert-heading">Loading...</h4>
@@ -23,7 +23,7 @@
 <!-- End Loading -->
 
 <!-- TABLE OF USER -->
-<div class="row">
+<div *ngIf="!loading" class="row">
   <div class="col-12">
     <div class="card">
       <div class="card-body">
@@ -39,9 +39,16 @@
             </thead>
 
             <tbody>
-              <tr>
-                <td class="text-center">Avatar</td>
-                <td>Doctor name</td>
+              <tr *ngFor="let medico of medicos">
+                <td class="text-center">
+                  <img
+                    (click)="openModal(medico)"
+                    [alt]="medico.nombre"
+                    [src]="medico.img | imagen: 'medicos'"
+                    class="w100 cursor avatar"
+                  />
+                </td>
+                <td>{{ medico.nombre }}</td>
 
                 <td class="text-nowrap text-center">
                   <a href="#" data-toggle="tooltip" data-original-title="Edit">
