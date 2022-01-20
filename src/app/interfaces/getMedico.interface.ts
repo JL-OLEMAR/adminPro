@@ -1,23 +1,22 @@
-export interface MedicosResponse {
+export interface GetMedicoResp {
   ok: boolean
   medicos: Medico[]
 }
 
 export interface Medico {
-  _id: string
   nombre: string
-  usuario: User
-  hospital: Hospital
+  usuario: _User
+  hospital: _Hospital
   img?: string
 }
 
-export interface Hospital {
+interface _Hospital {
   _id: string
   nombre: string
   img: string
 }
 
-interface User {
+interface _User {
   _id: string
   nombre: string
   img: string

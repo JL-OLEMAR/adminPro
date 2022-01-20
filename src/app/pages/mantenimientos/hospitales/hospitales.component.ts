@@ -44,9 +44,11 @@ export class HospitalesComponent implements OnInit, OnDestroy {
       return
     }
 
+    this.loading = true
     this._searchService.searchByTipo('hospitales', termino)
       .subscribe((resultados: Hospital[]) => {
         this.hospitales = resultados
+        this.loading = false
       })
   }
 

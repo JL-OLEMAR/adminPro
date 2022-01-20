@@ -3,7 +3,13 @@
   <div class="col-12">
     <div class="card">
       <div class="card-body">
-        <input class="form-control" type="text" placeholder="Doctor search" />
+        <input
+          (keyup)="searchMedico(txtTermino.value)"
+          #txtTermino
+          class="form-control"
+          placeholder="Doctor search"
+          type="text"
+        />
       </div>
     </div>
   </div>
@@ -22,12 +28,34 @@
 </div>
 <!-- End Loading -->
 
-<!-- TABLE OF USER -->
+<!-- TABLE OF DOCTORS -->
 <div *ngIf="!loading" class="row">
   <div class="col-12">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Doctors List</h4>
+        <!-- TITLE AND NEW DOCTOR -->
+        <div class="row">
+          <div class="col-8">
+            <h4 class="card-title p-t-10">
+              Lista de médicos ({{ medicos.length ?? 0 }})
+            </h4>
+          </div>
+
+          <div class="col">
+            <div class="text-right">
+              <a
+                (click)="openSweetAlertForm()"
+                [routerLink]="'/dashboard/medico/nuevo'"
+                class="btn btn-primary m-b-20"
+              >
+                <i class="fa fa-hospital-o"></i>
+                New doctor
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- END TITLE AND NEW DOCTOR -->
+
         <div class="table-responsive">
           <table class="table table-bordered">
             <thead>
@@ -51,7 +79,11 @@
                 <td>{{ medico.nombre }}</td>
 
                 <td class="text-nowrap text-center">
-                  <a href="#" data-toggle="tooltip" data-original-title="Edit">
+                  <a
+                    [routerLink]="['/dashboard/medico', medico._id]"
+                    data-toggle="tooltip"
+                    data-original-title="Edit"
+                  >
                     <i class="fa fa-pencil text-inverse m-r-10"></i>
                   </a>
 
@@ -67,11 +99,8 @@
             </tbody>
           </table>
         </div>
-
-        <!-- <button class="btn btn-secondary m-r-10">Anterior</button>
-        <button class="btn btn-secondary">Siguiente</button> -->
       </div>
     </div>
   </div>
 </div>
-<!-- END TABLE OF USER -->
+<!-- END TABLE OF DOCTORS -->

@@ -8,6 +8,7 @@ import { Usuario } from '../models/usuario.model'
 import { Hospital } from '../models/hospital.model'
 import { User as UserInterface } from '../interfaces/getUser.interface'
 import { Hospital as HospitalInterface } from '../interfaces/getHospital.interface'
+import { Medico } from '../interfaces/getMedico.interface'
 
 const baseUrl: string = environment.baseUrl
 
@@ -39,6 +40,10 @@ export class SearchService {
     return resultados
   }
 
+  private transformarMedicos (resultados: Medico[]): Medico[] {
+    return resultados
+  }
+
   searchByTipo (
     tipo: 'usuarios' | 'medicos' | 'hospitales',
     termino: string = ''
@@ -50,6 +55,8 @@ export class SearchService {
           return this.transformarUsuarios(resp.resultados)
         } else if (tipo === 'hospitales') {
           return this.transformarHospitales(resp.resultados)
+        } else if (tipo === 'medicos') {
+          return this.transformarMedicos(resp.resultados)
         } else {
           return []
         }
