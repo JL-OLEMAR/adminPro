@@ -44,7 +44,6 @@
           <div class="col">
             <div class="text-right">
               <a
-                (click)="openSweetAlertForm()"
                 [routerLink]="'/dashboard/medico/nuevo'"
                 class="btn btn-primary m-b-20"
               >
@@ -88,9 +87,10 @@
                   </a>
 
                   <a
-                    href="#"
-                    data-toggle="tooltip"
+                    (click)="deleteMedico(medico)"
+                    class="cursor"
                     data-original-title="Delete"
+                    data-toggle="tooltip"
                   >
                     <i class="fa fa-close text-danger"></i>
                   </a>
