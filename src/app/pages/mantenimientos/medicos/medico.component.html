@@ -1,10 +1,14 @@
 <div class="row">
-  <div class="col">
+  <div class="col-md-6">
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">Update doctor</h4>
 
-        <form class="form-horizontal p-t-20">
+        <form
+          (submit)="guardarMedico()"
+          [formGroup]="medicoForm"
+          class="form-horizontal p-t-20"
+        >
           <!-- Field Avatar -->
           <div class="form-group row">
             <label for="exampleInputuname3" class="col-sm-3 control-label">
@@ -28,8 +32,9 @@
                 <div class="input-group-addon"><i class="ti-user"></i></div>
                 <input
                   class="form-control"
+                  formControlName="nombre"
                   id="exampleInputuname3"
-                  placeholder="Doctorname"
+                  placeholder="Type doctor name here"
                   type="text"
                 />
               </div>
@@ -44,10 +49,14 @@
             </label>
             <div class="col-sm-9">
               <div class="input-group">
-                <select class="form-control">
-                  <option>Medico 1</option>
-                  <option>Medico 2</option>
-                  <option>Medico 3</option>
+                <select formControlName="hospital" class="form-control">
+                  <option value="">---Select Hospital---</option>
+                  <option
+                    *ngFor="let hospital of hospitals"
+                    [value]="hospital._id"
+                  >
+                    {{ hospital.nombre }}
+                  </option>
                 </select>
               </div>
             </div>
@@ -57,8 +66,9 @@
           <div class="form-group row m-b-0">
             <div class="offset-sm-3 col-sm-9">
               <button
-                type="submit"
+                [disabled]="medicoForm.invalid"
                 class="btn btn-success waves-effect waves-light"
+                type="submit"
               >
                 <i class="fa fa-save"></i>
                 Save
@@ -70,12 +80,18 @@
     </div>
   </div>
 
-  <div class="col">
+  <div *ngIf="hospitalSelect" class="col animated fadeIn fast">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Assigned hospital</h4>
+        <h4 class="card-title">
+          {{ hospitalSelect?.nombre }}
+        </h4>
 
-        <img class="w200" src="" alt="avatarPhoto" />
+        <img
+          [alt]="hospitalSelect?.nombre"
+          [src]="hospitalSelect?.img | imagen: 'hospitales'"
+          class="img-thumbnail w250"
+        />
       </div>
     </div>
   </div>
