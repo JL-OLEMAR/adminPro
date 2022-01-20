@@ -1,6 +1,6 @@
 export interface MedicosResponse {
   ok: boolean
-  medicos: Medico[]
+  medico: Medico
 }
 
 export interface Medico {
