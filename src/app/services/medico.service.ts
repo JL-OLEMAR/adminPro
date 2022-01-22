@@ -32,6 +32,13 @@ export class MedicoService {
       .pipe(map((resp: any) => resp.medicos))
   }
 
+  // Service to get one doctor
+  getDoctorById (id: string): Observable<Medico> {
+    const url = `${baseUrl}/medicos/${id}`
+    return this._http.get<MedicosResponse>(url, this.headers)
+      .pipe(map((resp: any) => resp.medico))
+  }
+
   // Service to create a new doctor
   newDoctor (medico: Medico): Observable<any> {
     const url = `${baseUrl}/medicos`
