@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-floating-promises, @typescript-eslint/strict-boolean-expressions */
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { Router, ActivatedRoute } from '@angular/router'
@@ -21,11 +21,10 @@ export class MedicoComponent implements OnInit, OnDestroy {
   public hospitals: Hospital[] = []
   public hospitalSelect: Hospital | undefined
   public medicoSelect: Medico | undefined
+  public title: string = 'Create doctor'
 
   private _hospitalSubs!: Subscription
   private _hospitalSelectSubs!: Subscription
-  private _newDoctorSubs!: Subscription
-  private _updateDoctorSubs!: Subscription
 
   constructor (
     private readonly _fb: FormBuilder,
@@ -39,8 +38,6 @@ export class MedicoComponent implements OnInit, OnDestroy {
     // Get id from url(params)
     this._activatedRoute.params
       .subscribe(({ id }) => this.getDoctorOf(id))
-
-    // this._medicoService.getDoctorById()
 
     // The form is initialized with the form builder
     this.medicoForm = this._fb.group({
@@ -58,14 +55,6 @@ export class MedicoComponent implements OnInit, OnDestroy {
       })
   }
 
-  // Destroy the subscriptions
-  ngOnDestroy (): void {
-    this._hospitalSubs.unsubscribe()
-    this._hospitalSelectSubs.unsubscribe()
-    this._newDoctorSubs.unsubscribe()
-    this._updateDoctorSubs.unsubscribe()
-  }
-
   // Get all hospitals
   getHospitals (): void {
     this._hospitalSubs = this._hospitalService.getAllHospitals()
@@ -81,9 +70,9 @@ export class MedicoComponent implements OnInit, OnDestroy {
     this._medicoService.getDoctorById(id)
       .pipe(delay(100))
       .subscribe((medico: Medico) => {
-        if (!medico) {
-          this._router.navigateByUrl('/dashboard/medicos')
-        } else {
+        if (medico !== undefined) {
+          this.title = 'Update doctor'
+
           // Get data of the doctor select
           this.medicoSelect = medico
 
@@ -91,29 +80,41 @@ export class MedicoComponent implements OnInit, OnDestroy {
           const { nombre, hospital: { _id } } = medico
           this.medicoForm.setValue({ nombre, hospital: _id })
         }
+      }, () => {
+        // If the id is not found, redirect to the list of doctors
+        this._router.navigateByUrl('/dashboard/medicos')
       })
   }
 
-  // Save the doctor
+  // Save or update the doctor
   guardarMedico (): void {
-    if (this.medicoSelect) {
+    const { nombre } = this.medicoForm.value
+
+    if (this.medicoSelect !== undefined) {
       // Doctor update
       const data = {
         ...this.medicoForm.value,
         _id: this.medicoSelect._id
       }
 
-      this._updateDoctorSubs = this._medicoService.updateDoctor(data)
-        .subscribe((resp: MedicosResponse) => {
-          Swal.fire('Doctor updated', `${resp.medico.nombre}, has been successfully updated`, 'success')
+      this._medicoService.updateDoctor(data)
+        .subscribe(() => {
+          Swal.fire('Doctor updated', `${(nombre) as string}, has been successfully updated`, 'success')
         })
     } else {
       // Doctor create
-      this._newDoctorSubs = this._medicoService.newDoctor(this.medicoForm.value)
+      this.title = 'Create doctor'
+      this._medicoService.newDoctor(this.medicoForm.value)
         .subscribe((resp: MedicosResponse) => {
-          Swal.fire('Médico creado', `${resp.medico.nombre}, has been successfully created`, 'success')
+          Swal.fire('Médico creado', `${(nombre) as string}, has been successfully created`, 'success')
           this._router.navigateByUrl(`/dashboard/medico/${resp.medico._id}`)
         })
     }
+  }
+
+  // Destroy the subscriptions
+  ngOnDestroy (): void {
+    this._hospitalSubs.unsubscribe()
+    this._hospitalSelectSubs.unsubscribe()
   }
 }
