@@ -9,6 +9,7 @@ import { Hospital } from '../models/hospital.model'
 import { User as UserInterface } from '../interfaces/getUser.interface'
 import { Hospital as HospitalInterface } from '../interfaces/getHospital.interface'
 import { Medico } from '../interfaces/getMedico.interface'
+import { GlobalSearchResp } from '../interfaces/getGlobalSearchResp.interface'
 
 const baseUrl: string = environment.baseUrl
 
@@ -61,5 +62,10 @@ export class SearchService {
           return []
         }
       }))
+  }
+
+  globalSearch (termino: string): Observable<any> {
+    const url = `${baseUrl}/todo/${termino}`
+    return this.http.get<GlobalSearchResp>(url, this.headers)
   }
 }

@@ -88,11 +88,12 @@
           >
             <i class="ti-search"></i>
           </a>
-          <form class="app-search">
+          <form (submit)="search(txtTermino.value)" class="app-search">
             <input
-              type="text"
+              #txtTermino
               class="form-control"
-              placeholder="Search & enter"
+              placeholder="Search doctor, hospital o usuario"
+              type="text"
             />
             <a class="srh-btn"><i class="ti-close"></i></a>
           </form>
@@ -427,6 +428,9 @@
             </ul>
           </div>
         </li>
+        <!-- ============================================================== -->
+        <!-- End Profile -->
+        <!-- ============================================================== -->
       </ul>
     </div>
   </nav>
