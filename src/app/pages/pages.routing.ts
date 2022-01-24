@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core'
 
 // Guards
 import { AuthGuard } from '../guards/auth.guard'
+import { AdminGuard } from '../guards/admin.guard'
 
 // Components
 import { AccountSettingsComponent } from './account-settings/account-settings.component'
@@ -40,7 +41,9 @@ const routes: Routes = [
       { path: 'hospitales', component: HospitalesComponent, data: { titulo: 'Mantenimiento de hospitales' } },
       { path: 'medico/:id', component: MedicoComponent, data: { titulo: 'Mantenimiento de médico' } },
       { path: 'medicos', component: MedicosComponent, data: { titulo: 'Médicos' } },
-      { path: 'usuarios', component: UsuariosComponent, data: { titulo: 'Mantenimiento de usuarios' } }
+
+      // Admin routes
+      { path: 'usuarios', canActivate: [AdminGuard], component: UsuariosComponent, data: { titulo: 'Mantenimiento de usuarios' } }
     ]
   }
 ]

@@ -44,6 +44,10 @@ export class UsuarioService {
     return this.usuario.uid ?? ''
   }
 
+  get role (): 'ADMIN_ROLE' | 'USER_ROLE' {
+    return this.usuario.role ?? 'USER_ROLE'
+  }
+
   async googleInit (): Promise<any> {
     return await new Promise<void>(resolve => {
       gapi.load('auth2', () => {
@@ -68,10 +72,7 @@ export class UsuarioService {
   }
 
   actualizarUsuario (user: UpdateUserForm): Observable<any> {
-    user = {
-      ...user,
-      role: this.usuario.role ?? 'ROLE_USER'
-    }
+    user = { ...user, role: this.role }
     return this.http.put(`${baseUrl}/usuarios/${this.uid}`, user, this.headers)
   }
 

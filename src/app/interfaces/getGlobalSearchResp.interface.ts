@@ -8,7 +8,7 @@ export interface GlobalSearchResp {
 export interface Usuario {
   nombre: string
   email: string
-  role: string
+  role: 'ADMIN_ROLE' | 'USER_ROLE'
   google: boolean
   img: string
   uid: string

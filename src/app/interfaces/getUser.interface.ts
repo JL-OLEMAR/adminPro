@@ -8,7 +8,7 @@ export interface User {
   nombre: string
   email: string
   img: string
-  role: string
+  role: 'ADMIN_ROLE' | 'USER_ROLE'
   google: boolean
   uid: string
 }
