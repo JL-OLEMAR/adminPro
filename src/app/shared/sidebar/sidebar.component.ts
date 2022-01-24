@@ -10,17 +10,13 @@ import { Usuario } from '../../models/usuario.model'
 })
 export class SidebarComponent {
   public usuario!: Usuario
-  public menuItems: any[] = []
 
   constructor (
-    private readonly sidebarService: SidebarService,
-    private readonly usuarioService: UsuarioService
-  ) {
-    this.menuItems = this.sidebarService.menu
-    this.usuario = this.usuarioService.usuario
-  }
+    public sidebarService: SidebarService,
+    private readonly _usuarioService: UsuarioService
+  ) { this.usuario = this._usuarioService.usuario }
 
   logout (): void {
-    this.usuarioService.logout()
+    this._usuarioService.logout()
   }
 }

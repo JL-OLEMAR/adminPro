@@ -2,23 +2,28 @@
 <!-- Left Sidebar - style you can find in sidebar.scss  -->
 <!-- ============================================================== -->
 <aside class="left-sidebar">
-  <!-- Sidebar scroll-->
   <div class="scroll-sidebar">
     <!-- Sidebar navigation-->
     <nav class="sidebar-nav">
       <ul id="sidebarnav">
+        <!-- User Profile -->
         <li class="user-profile">
           <a
             class="has-arrow waves-effect waves-dark"
             href="#"
             aria-expanded="false"
           >
-            <img [src]="usuario.imagenUrl" alt="user" />
+            <img
+              [src]="usuario.imagenUrl"
+              [alt]="usuario.nombre"
+              style="height: 30px; width: 30px; object-fit: cover"
+            />
             <span class="hide-menu">
               {{ usuario.nombre | slice: 0:16 }}
               {{ usuario.nombre.length > 16 ? "..." : "" }}
             </span>
           </a>
+
           <ul aria-expanded="false" class="collapse">
             <li>
               <a [routerLink]="'perfil'" [routerLinkActive]="'active'">
@@ -37,10 +42,13 @@
             </li>
           </ul>
         </li>
-        <li class="nav-devider"></li>
+        <!-- End User Profile -->
 
+        <li class="nav-devider"></li>
         <li class="nav-small-cap">PERSONAL</li>
-        <li *ngFor="let item of menuItems">
+
+        <!-- Navigation Menu -->
+        <li *ngFor="let item of sidebarService.menu">
           <a
             class="has-arrow waves-effect waves-dark"
             href="#"
@@ -55,6 +63,7 @@
             </span>
           </a>
 
+          <!-- SubMenu -->
           <ul aria-expanded="false" class="collapse">
             <li *ngFor="let subItem of item.submenu">
               <a
@@ -66,12 +75,13 @@
               </a>
             </li>
           </ul>
+          <!-- End SubMenu -->
         </li>
+        <!-- End Navigation Menu -->
       </ul>
     </nav>
     <!-- End Sidebar navigation -->
   </div>
-  <!-- End Sidebar scroll-->
 </aside>
 <!-- ============================================================== -->
 <!-- End Left Sidebar - style you can find in sidebar.scss  -->

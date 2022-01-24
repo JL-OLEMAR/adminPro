@@ -15,9 +15,7 @@ export class HeaderComponent {
   constructor (
     private readonly usuarioService: UsuarioService,
     private readonly _router: Router
-  ) {
-    this.usuario = this.usuarioService.usuario
-  }
+  ) { this.usuario = this.usuarioService.usuario }
 
   logout (): void {
     this.usuarioService.logout()

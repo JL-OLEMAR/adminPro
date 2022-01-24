@@ -57,11 +57,14 @@ export class UsuarioService {
     })
   }
 
+  saveLocalStorage (token: string, menu: any): void {
+    window.localStorage.setItem('token', token)
+    window.localStorage.setItem('menu', JSON.stringify(menu))
+  }
+
   crearUsuario (formData: RegisterForm): Observable<any> {
     return this.http.post(`${baseUrl}/usuarios`, formData)
-      .pipe(tap((resp: any) => {
-        window.localStorage.setItem('token', resp.token)
-      }))
+      .pipe(tap((resp: any) => this.saveLocalStorage(resp.token, resp.menu)))
   }
 
   actualizarUsuario (user: UpdateUserForm): Observable<any> {
@@ -78,16 +81,12 @@ export class UsuarioService {
 
   login (formData: LoginForm): Observable<any> {
     return this.http.post(`${baseUrl}/login`, formData)
-      .pipe(tap((resp: any) => {
-        window.localStorage.setItem('token', resp.token)
-      }))
+      .pipe(tap((resp: any) => this.saveLocalStorage(resp.token, resp.menu)))
   }
 
   loginGoogle (token: string): Observable<any> {
     return this.http.post(`${baseUrl}/login/google`, { token })
-      .pipe(tap((resp: any) => {
-        window.localStorage.setItem('token', resp.token)
-      }))
+      .pipe(tap((resp: any) => this.saveLocalStorage(resp.token, resp.menu)))
   }
 
   validarToken (): Observable<boolean> {
@@ -95,7 +94,8 @@ export class UsuarioService {
       map((resp: any) => {
         const { nombre, email, img = '', role, google, uid } = resp.usuario
         this.usuario = new Usuario(nombre, email, '', img, role, google, uid)
-        window.localStorage.setItem('token', resp.token)
+
+        this.saveLocalStorage(resp.token, resp.menu)
         return true
       }),
       catchError(() => { return of(false) }) // Atrapa el error y devuelve un observable de false
@@ -104,6 +104,7 @@ export class UsuarioService {
 
   logout (): void {
     window.localStorage.removeItem('token')
+    window.localStorage.removeItem('menu')
 
     this.auth2.signOut().then(() => {
       this.ngZone.run(() => {

@@ -92,7 +92,7 @@
             <input
               #txtTermino
               class="form-control"
-              placeholder="Search doctor, hospital o usuario"
+              placeholder="Search & enter"
               type="text"
             />
             <a class="srh-btn"><i class="ti-close"></i></a>
@@ -368,7 +368,12 @@
             <img
               [src]="usuario.imagenUrl"
               [alt]="usuario.nombre"
-              class="profile-pic"
+              style="
+                height: 30px;
+                width: 30px;
+                object-fit: cover;
+                border-radius: 100%;
+              "
             />
           </a>
 

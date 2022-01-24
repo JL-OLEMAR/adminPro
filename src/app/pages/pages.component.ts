@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { SettingsService } from '../services/settings.service'
+import { SidebarService } from '../services/sidebar.service'
 
 /*
   La funcion customInitFuctions(), sirve para ejecutar funciones globales.
@@ -15,9 +16,13 @@ export class PagesComponent implements OnInit {
   year: number = new Date().getFullYear()
 
   // settingsService: muestra el thema por defecto
-  constructor (private readonly settingsService: SettingsService) {}
+  constructor (
+    private readonly _settingsService: SettingsService,
+    private readonly _sidebarService: SidebarService
+  ) {}
 
   ngOnInit (): void {
     customInitFuctions()
+    this._sidebarService.getMenu()
   }
 }
