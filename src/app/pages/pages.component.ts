@@ -7,6 +7,7 @@ import { SidebarService } from '../services/sidebar.service'
   la cual se encuentra en el path ./assets/js/custom.min.js
 */
 declare function customInitFuctions (): void
+
 @Component({
   selector: 'app-pages',
   templateUrl: './pages.component.html',

@@ -7,10 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "stylelint ./src/app/**/*.css && ts-standard --fix ./src/app/**/*.ts",
-    "phoenix": "rm -rf ./node_modules package-lock.json && npm install --legacy-peer-deps",
-    "prepare": "husky install",
-    "co": "sui-mono commit"
+    "lint": "stylelint ./src/app/**/*.css && ts-standard --fix ./src/app/**/*.ts"
   },
   "private": true,
   "dependencies": {
@@ -33,10 +30,8 @@
     "@angular-devkit/build-angular": "13.0.1",
     "@angular/cli": "13.0.1",
     "@angular/compiler-cli": "13.0.0",
-    "@s-ui/mono": "2.18.0",
     "@types/jasmine": "3.10.0",
     "@types/node": "12.11.1",
-    "husky": "7.0.4",
     "jasmine-core": "3.10.0",
     "karma-chrome-launcher": "3.1.0",
     "karma-coverage": "2.0.3",
@@ -56,10 +51,5 @@
       "./node_modules/**",
       "./src/assets/**"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint"
-    }
   }
 }

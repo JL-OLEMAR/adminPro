@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  baseUrl: 'http://localhost:3000/api'
+  baseUrl: 'https://angular-pro-server.herokuapp.com/api',
+  googleID: '364111995335-2tsebf87v3o38dpipimvvkehf4f15pcd.apps.googleusercontent.com'
 }

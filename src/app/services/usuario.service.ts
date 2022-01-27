@@ -13,7 +13,7 @@ import { GetUserResponse } from '../interfaces/getUser.interface'
 import { UpdateUserForm } from '../interfaces/updateUser-form.interface'
 import { Usuario } from '../models/usuario.model'
 
-const baseUrl: string = environment.baseUrl
+const { baseUrl, googleID } = environment
 
 declare const gapi: any
 
@@ -52,7 +52,7 @@ export class UsuarioService {
     return await new Promise<void>(resolve => {
       gapi.load('auth2', () => {
         this.auth2 = gapi.auth2.init({
-          client_id: '364111995335-ka02ni351tbt4n280d14bvl56ngfrq0r.apps.googleusercontent.com',
+          client_id: `${googleID}`,
           cookiepolicy: 'single_host_origin'
         })
 
